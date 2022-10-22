@@ -1,5 +1,6 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
+import Link from 'next/link'
 import { Footer } from '../components/footer'
 import { Logo } from '../components/logo'
 import { ProgressBar } from '../components/progressbar'
@@ -35,10 +36,10 @@ const Home: NextPage = () => (
           <h2> BBCafe &rarr;</h2>
           <p> Take assistance from our trained assistants to naviagate issues.</p>
         </a>
-        <a href="https://uwindsor.teamdynamix.com/" className={styles.card}>
+        <Link href="https://uwindsor.teamdynamix.com/" className={styles.card}>
           <h2>TDX &rarr;</h2>
           <p>  Raise tickets for teachnical issues realted to Brightspace.</p>
-        </a>
+        </Link>
 
       </div>
     </main>
