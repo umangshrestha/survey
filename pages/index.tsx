@@ -28,10 +28,10 @@ const Home: NextPage = () => (
           <h2>Workshops &rarr;</h2>
           <p> Further develop teaching and learning and utilizing Brightspace.</p>
         </a>
-        <Link href="/survey" className={styles.card}>
+        <a href="/survey" className={styles.card}>
           <h2>Survey &rarr;</h2>
           <p>  Providing valuable feedback about the session you attended.</p>
-        </Link>
+        </a>
         <a href="https://blackboard.ca/bbcafe" className={styles.card}>
           <h2> BBCafe &rarr;</h2>
           <p> Take assistance from our trained assistants to naviagate issues.</p>

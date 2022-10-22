@@ -1,0 +1,31 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("NEXT_PUBLIC_DATABASE_URI")
+}
+
+model Feedback {
+  id                 Int      @id @default(autoincrement())
+  facultyNames       String
+  effectivePart      String
+  usefulIdea         String
+  changesSuggested   String
+  topicsForFuture    String
+  additionalComments String
+  rating             Int
+  date               DateTime
+  Workshop           Workshop @relation(fields: [workshopId], references: [id])
+  workshopId         Int
+}
+
+model Workshop {
+  id       Int        @id @default(autoincrement())
+  workshop String     @unique
+  Feedback Feedback[]
+}

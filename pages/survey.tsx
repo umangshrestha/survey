@@ -11,6 +11,11 @@ import Select from 'react-select';
 import Head from 'next/head'
 import Image from 'next/image';
 
+
+interface IWorkshop {
+    id: number;
+    workshop: string;
+}
 interface IForm {
     workshop: string;
     facultyNames: string;
@@ -28,13 +33,13 @@ interface ICategory {
 }
 
 
-const Survey = ({ workshops }: { workshops: string[] }) => {
+const Survey = ({ workshops }: { workshops: IWorkshop[] }) => {
     const [percentage, setPercentage] = useState(0);
     const [startDate, setStartDate] = useState(new Date());
     const { register, control, handleSubmit, getValues } = useForm<IForm>();
     const [rating, setRating] = useState(5);
 
-    const workShopOptions: ICategory[] = workshops.map(x => ({ value: x, label: x }))
+    const workShopOptions: ICategory[] = workshops.map(x => ({ value: x.workshop, label: x.workshop }))
 
     const submitForm = (data: IForm) => {
         console.table({ startDate, rating, ...data })
@@ -52,7 +57,7 @@ const Survey = ({ workshops }: { workshops: string[] }) => {
                     <label htmlFor="workshop">Please select the name of the workshop from the list below:</label>
                     <Controller
                         control={control}
-                        defaultValue={workshops[0]}
+                        defaultValue={workshops[0].workshop}
                         render={({ field: { onChange, value, name, ref } }) => {
                             const currentSelection = workShopOptions.find(
                                 (c) => c.value === value
