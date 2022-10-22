@@ -44,7 +44,7 @@ const Survey = ({ workshops }: { workshops: string[] }) => {
         switch (percentage) {
             case 0:
                 return (<>
-                    <Image className={styles.img} src="/hi-mascot.png" alt="moose mascot saying hi" />
+                    <img className={styles.img} src="/hi-mascot.png" alt="moose mascot saying hi" />
                     <p className={styles.img} >Please help us design future effective workshops, by providing valuable feedback about the session you attended.</p>
                 </>)
             case 10:
@@ -63,7 +63,6 @@ const Survey = ({ workshops }: { workshops: string[] }) => {
 
                             return (
                                 <Select
-                                    inputRef={ref}
                                     id="long-value-select"
                                     instanceId="long-value-select" value={currentSelection}
                                     name={name}
@@ -84,7 +83,7 @@ const Survey = ({ workshops }: { workshops: string[] }) => {
             case 30:
                 return (<>
                     < label htmlFor="rating" > How would you rate the session:</label >
-                    <ReactStars id="rating" className={styles.input} count={7} value={rating} onChange={(val: number) => setRating(val)} size={24} color2={'#ffd700'} />
+                    <ReactStars key="rating" className={styles.input} count={7} value={rating} onChange={(val: number) => setRating(val)} size={24} color2={'#ffd700'} />
                 </>)
             case 40:
                 return (<>
@@ -119,7 +118,7 @@ const Survey = ({ workshops }: { workshops: string[] }) => {
                 </>)
             default:
                 return (<>
-                    <Image className={styles.img} src="/thankyou-mascot.png" alt="moose saying thankyou" />
+                    <img className={styles.img} src="/thankyou-mascot.png" alt="moose saying thankyou" />
                     <p>We appreciate the time you took to provide us with feedback.  We can continue to develop high-quality experiences using your suggestions.</p>
                     <p> If you are interested in further development with teaching and learning and utilizing Brightspace, please visit:</p>
                     <a className={styles.a} href="https://ctl2.uwindsor.ca/workshops/145/">https://ctl2.uwindsor.ca/workshops/145/</a>.
