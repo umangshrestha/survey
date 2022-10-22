@@ -9,6 +9,7 @@ import styles from '../styles/Survey.module.css';
 import { useForm, Controller } from 'react-hook-form';
 import Select from 'react-select';
 import Head from 'next/head'
+import Image from 'next/image';
 
 interface IForm {
     workshop: string;
@@ -43,7 +44,7 @@ const Survey = ({ workshops }: { workshops: string[] }) => {
         switch (percentage) {
             case 0:
                 return (<>
-                    <img className={styles.img} src="/hi-mascot.png" alt="moose mascot saying hi" />
+                    <Image className={styles.img} src="/hi-mascot.png" alt="moose mascot saying hi" />
                     <p className={styles.img} >Please help us design future effective workshops, by providing valuable feedback about the session you attended.</p>
                 </>)
             case 10:
@@ -118,7 +119,7 @@ const Survey = ({ workshops }: { workshops: string[] }) => {
                 </>)
             default:
                 return (<>
-                    <img className={styles.img} src="/thankyou-mascot.png" alt="moose saying thankyou" />
+                    <Image className={styles.img} src="/thankyou-mascot.png" alt="moose saying thankyou" />
                     <p>We appreciate the time you took to provide us with feedback.  We can continue to develop high-quality experiences using your suggestions.</p>
                     <p> If you are interested in further development with teaching and learning and utilizing Brightspace, please visit:</p>
                     <a className={styles.a} href="https://ctl2.uwindsor.ca/workshops/145/">https://ctl2.uwindsor.ca/workshops/145/</a>.
