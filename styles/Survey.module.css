@@ -33,7 +33,8 @@
     border-radius: 10px;
     font-size: 1.5rem;
 }
-.input[type=text]{
+
+.input[type=text] {
     overflow-y: true;
     height: 4.5rem;
 }
@@ -54,4 +55,19 @@
 
 .button:disabled {
     background-color: #ddd;
+}
+
+.a {
+    color: #0070f3;
+}
+
+.a:active,
+.a:hover {
+    text-decoration: underline;
+}
+
+.img {
+    display: block;
+    margin: auto;
+    text-align: center;
 }

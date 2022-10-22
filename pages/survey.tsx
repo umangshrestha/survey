@@ -27,7 +27,7 @@ interface ICategory {
 
 
 const Survey = ({ workshops }: { workshops: string[] }) => {
-    const [percentage, setPercentage] = useState(10);
+    const [percentage, setPercentage] = useState(0);
     const [startDate, setStartDate] = useState(new Date());
     const { register, control, handleSubmit, getValues } = useForm<IForm>();
     const [rating, setRating] = useState(5);
@@ -40,6 +40,11 @@ const Survey = ({ workshops }: { workshops: string[] }) => {
 
     const SurveyItemList = ({ percentage }: { percentage: number }) => {
         switch (percentage) {
+            case 0:
+                return (<>
+                    <img className={styles.img} src="/hi-mascot.png" alt="moose mascot saying hi"/>
+                    <p className={styles.img} >Please help us design future effective workshops, by providing valuable feedback about the session you attended.</p>
+                </>)
             case 10:
                 return (<>
                     <label htmlFor="workshop">Please select the name of the workshop from the list below:</label>
@@ -105,9 +110,17 @@ const Survey = ({ workshops }: { workshops: string[] }) => {
                     < label htmlFor="additionalComments" > Additional Comments?</label >
                     <input type="text" className={styles.input} id="additionalComments" {...register("additionalComments")} size={250} />
                 </>)
+            case 90:
+                setTimeout(()=>{setPercentage(100)}, 2000)
+                return (<>
+                    <p>Please wait while we send your feedback.</p>
+                </>)
             default:
                 return (<>
-                    <button onClick={handleSubmit(submitForm)} />
+                    <img className={styles.img} src="/thankyou-mascot.png" alt="moose saying thankyou"/>
+                    <p>We appreciate the time you took to provide us with feedback.  We can continue to develop high-quality experiences using your suggestions.</p>
+                    <p> If you are interested in further development with teaching and learning and utilizing Brightspace, please visit:</p> 
+                    <a  className={styles.a} href="https://ctl2.uwindsor.ca/workshops/145/">https://ctl2.uwindsor.ca/workshops/145/</a>.
                 </>)
         }
     }
@@ -123,8 +136,8 @@ const Survey = ({ workshops }: { workshops: string[] }) => {
                 </div>
             </div>
             <section className={styles.section}>
-                <button className={styles.button} onClick={() => setPercentage(percentage - 10)} disabled={percentage === 10}>back</button>
-                <button className={styles.button} onClick={() => setPercentage(percentage + 10)} disabled={percentage === 90}>front</button>
+                <button className={styles.button} onClick={() => setPercentage(percentage - 10)} disabled={percentage === 0 || percentage === 100}>back</button>
+                <button className={styles.button} onClick={() => setPercentage(percentage + 10)} disabled={percentage > 80}>front</button>
             </section>
         </main>
     </div>)
