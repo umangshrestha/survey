@@ -103,7 +103,7 @@ const Survey = ({ workshops }: { workshops: string[] }) => {
                 </>)
             case 70:
                 return (<>
-                    < label htmlFor="topicsForFuture" >Do you have any additional topics that you would like to see in future workshops? (While we can't promise we can offer everything suggested, it will help us define demand for a particular area).
+                    < label htmlFor="topicsForFuture" >Do you have any additional topics that you would like to see in future workshops? (While we can&apos;t promise we can offer everything suggested, it will help us define demand for a particular area).
                     </label >
                     <input type="text" className={styles.input} id="topicsForFuture" {...register("topicsForFuture")} size={250} />
                 </>)

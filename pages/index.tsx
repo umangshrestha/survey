@@ -28,18 +28,18 @@ const Home: NextPage = () => (
           <h2>Workshops &rarr;</h2>
           <p> Further develop teaching and learning and utilizing Brightspace.</p>
         </a>
-        <a href="/survey" className={styles.card}>
+        <Link href="/survey" className={styles.card}>
           <h2>Survey &rarr;</h2>
           <p>  Providing valuable feedback about the session you attended.</p>
-        </a>
+        </Link>
         <a href="https://blackboard.ca/bbcafe" className={styles.card}>
           <h2> BBCafe &rarr;</h2>
           <p> Take assistance from our trained assistants to naviagate issues.</p>
         </a>
-        <Link href="https://uwindsor.teamdynamix.com/" className={styles.card}>
+        <a href="https://uwindsor.teamdynamix.com/" className={styles.card}>
           <h2>TDX &rarr;</h2>
           <p>  Raise tickets for teachnical issues realted to Brightspace.</p>
-        </Link>
+        </a>
 
       </div>
     </main>

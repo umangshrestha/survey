@@ -8,6 +8,6 @@ const workshops = [
 
 ]
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
-    res.send({workshops});
+export default async function  workshop(req: NextApiRequest, res: NextApiResponse){
+    res.send({ workshops });
 };
