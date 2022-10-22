@@ -24,3 +24,13 @@ a {
     background: black;
   }
 }
+
+
+
+main {
+  min-height: 94vh;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
