@@ -23,11 +23,11 @@ interface IFaculty {
 }
 interface IForm {
     workshop: string;
-    facultyNames: string;
-    usefulIdea: string;
-    changesSuggested: string;
-    topicsForFuture: string;
-    additionalComments: string;
+    faculty_names: string;
+    useful_idea: string;
+    changes_suggested: string;
+    topics_for_future: string;
+    additional_comments : string;
 }
 
 
@@ -48,13 +48,14 @@ const Survey = ({ workshops, facultys }: IProp) => {
     const [rating, setRating] = useState(5);
 
     const workShopOptions: ICategory[] = workshops.map(x => ({ value: x.workshop, label: x.workshop }))
-    const facultyOptions: ICategory[] = workshops.map(x => ({ value: x.workshop, label: x.workshop }))
+    const facultyOptions: ICategory[] = facultys.map(x => ({ value: x.faculty, label: x.faculty }))
 
     const submitForm = async (data: IForm) => {
-        const res = await fetch(BASE_URL + "/api/feedback", {
+        const res = await fetch(BASE_URL + "/feedback", {
             method: "POST",
             body: JSON.stringify({ date: startDate, rating, ...data }),
         })
+        console.log(await res.json())
         if (res.status == 200)
             setPercentage(100);
         else
@@ -87,7 +88,7 @@ const Survey = ({ workshops, facultys }: IProp) => {
                                     id="long-value-select"
                                     instanceId="long-value-select" value={currentSelection}
                                     name={name}
-                                    options={workShopOptions}
+                                    options={facultyOptions}
                                     onChange={handleSelectChange}
                                 />
                             );
@@ -109,28 +110,51 @@ const Survey = ({ workshops, facultys }: IProp) => {
             case 40:
                 return (<>
                     < label htmlFor="name" > Facilator(s) name for session:</label >
-                    <input type="text" className={styles.input} id="name" {...register("facultyNames")} />
+                    <Controller
+                        control={control}
+                        defaultValue={facultys[0].faculty}
+                        render={({ field: { onChange, value, name, ref } }) => {
+                            const currentSelection = facultyOptions.find(
+                                (c) => c.value === value
+                            );
+                            const handleSelectChange = (selectedOption: ICategory | null) => {
+                                onChange(selectedOption?.value);
+                            };
+
+                            return (
+                                <Select
+                                    id="long-value-select"
+                                    instanceId="long-value-select" value={currentSelection}
+                                    name={name}
+                                    options={workShopOptions}
+                                    onChange={handleSelectChange}
+                                />
+                            );
+                        }}
+                        name="faculty_names"
+                        rules={{ required: true }}
+                    />
                 </>)
             case 50:
                 return (<>
                     < label htmlFor="usefulIdea" > What is one idea or practice from this workshop that you will use?</label >
-                    <input type="text" className={styles.input} id="usefulIdea" {...register("usefulIdea")} />
+                    <input type="text" className={styles.input} id="usefulIdea" {...register("useful_idea")} />
                 </>)
             case 60:
                 return (<>
                     < label htmlFor="effectivePart" >What changes would make this workshop more effective?</label >
-                    <input type="text" className={styles.input} id="changesSuggested" {...register("changesSuggested")} size={250} />
+                    <input type="text" className={styles.input} id="changesSuggested" {...register("changes_suggested")} size={250} />
                 </>)
             case 70:
                 return (<>
                     < label htmlFor="topicsForFuture" >Do you have any additional topics that you would like to see in future workshops? (While we can&apos;t promise we can offer everything suggested, it will help us define demand for a particular area).
                     </label >
-                    <input type="text" className={styles.input} id="topicsForFuture" {...register("topicsForFuture")} size={250} />
+                    <input type="text" className={styles.input} id="topicsForFuture" {...register("topics_for_future")} size={250} />
                 </>)
             case 80:
                 return (<>
                     < label htmlFor="additionalComments" > Additional Comments?</label >
-                    <input type="text" className={styles.input} id="additionalComments" {...register("additionalComments")} size={250} />
+                    <input type="text" className={styles.input} id="additionalComments" {...register("additional_comments")} size={250} />
                 </>)
             case 90:
                 handleSubmit(submitForm)()
@@ -187,4 +211,7 @@ export async function getStaticProps() {
             facultys: await res[1].json(),
         }
     }
-    export default Survey;
+
+}
+
+export default Survey;
