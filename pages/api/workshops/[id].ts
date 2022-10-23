@@ -10,11 +10,11 @@ export default async function workshop(req: NextApiRequest, res: NextApiResponse
             let data = await prisma.workshop.delete({ where: { id } });;
             return res.status(200).json(data);
         case "PUT":
-            let data = await prisma.workshop.update({ where: { id }, data: req.body });;
-            return res.status(200).json(data)
+            let data1 = await prisma.workshop.update({ where: { id }, data: req.body });;
+            return res.status(200).json(data1)
         case "GET":
-            let data = await prisma.workshop.findUnique({ where: { id } });
-            return res.send({ workshops: data });
+            let data2 = await prisma.workshop.findUnique({ where: { id } });
+            return res.send({ workshops: data2 });
         default:
             return res.status(405).send({ message: "methods not allowed" })
     }
