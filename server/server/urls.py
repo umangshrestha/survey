@@ -16,10 +16,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.urls.conf import include
+from django.urls import re_path as url
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-    path("", include("survey.urls")),
-
+    path(r'admin/', admin.site.urls),
+    path(r'api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    path(r"", include("survey.urls")),
 ]
