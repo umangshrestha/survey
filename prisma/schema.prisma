@@ -13,14 +13,13 @@ datasource db {
 model Feedback {
   id                 Int      @id @default(autoincrement())
   facultyNames       String
-  effectivePart      String
   usefulIdea         String
   changesSuggested   String
   topicsForFuture    String
   additionalComments String
   rating             Int
   date               DateTime
-  Workshop           Workshop @relation(fields: [workshopId], references: [id])
+  workshop           Workshop @relation(fields: [workshopId], references: [id])
   workshopId         Int
 }
 

@@ -9,7 +9,6 @@ import styles from '../styles/Survey.module.css';
 import { useForm, Controller } from 'react-hook-form';
 import Select from 'react-select';
 import Head from 'next/head'
-import Image from 'next/image';
 
 
 interface IWorkshop {
@@ -19,7 +18,6 @@ interface IWorkshop {
 interface IForm {
     workshop: string;
     facultyNames: string;
-    effectivePart: string;
     usefulIdea: string;
     changesSuggested: string;
     topicsForFuture: string;
@@ -36,13 +34,20 @@ interface ICategory {
 const Survey = ({ workshops }: { workshops: IWorkshop[] }) => {
     const [percentage, setPercentage] = useState(0);
     const [startDate, setStartDate] = useState(new Date());
-    const { register, control, handleSubmit, getValues } = useForm<IForm>();
+    const { register, control, handleSubmit } = useForm<IForm>();
     const [rating, setRating] = useState(5);
 
     const workShopOptions: ICategory[] = workshops.map(x => ({ value: x.workshop, label: x.workshop }))
 
-    const submitForm = (data: IForm) => {
-        console.table({ startDate, rating, ...data })
+    const submitForm = async (data: IForm) => {
+        const res = await fetch(BASE_URL + "/api/feedback", {
+            method: "POST",
+            body: JSON.stringify({ date: startDate, rating, ...data }),
+        })
+        if (res.status == 200)
+            setPercentage(100);
+        else
+            setPercentage(99);
     }
 
     const SurveyItemList = ({ percentage }: { percentage: number }) => {
@@ -103,7 +108,7 @@ const Survey = ({ workshops }: { workshops: IWorkshop[] }) => {
             case 60:
                 return (<>
                     < label htmlFor="effectivePart" >What changes would make this workshop more effective?</label >
-                    <input type="text" className={styles.input} id="effectivePart" {...register("effectivePart")} size={250} />
+                    <input type="text" className={styles.input} id="changesSuggested" {...register("changesSuggested")} size={250} />
                 </>)
             case 70:
                 return (<>
@@ -117,9 +122,15 @@ const Survey = ({ workshops }: { workshops: IWorkshop[] }) => {
                     <input type="text" className={styles.input} id="additionalComments" {...register("additionalComments")} size={250} />
                 </>)
             case 90:
-                setTimeout(() => { setPercentage(100) }, 2000)
+                handleSubmit(submitForm)()
                 return (<>
                     <p>Please wait while we send your feedback.</p>
+                </>)
+            case 99:
+                return (<>
+                    <img className={styles.img} src="/wtf-mascot.png" alt="moose mascot feeling wtf" />
+                    <p>We are facing unknown issue at the moment.</p>
+                    <p>Please try again after some time.</p>
                 </>)
             default:
                 return (<>
@@ -147,7 +158,7 @@ const Survey = ({ workshops }: { workshops: IWorkshop[] }) => {
                 </div>
             </div>
             <section className={styles.section}>
-                <button className={styles.button} onClick={() => setPercentage(percentage - 10)} disabled={percentage === 0 || percentage === 100}>back</button>
+                <button className={styles.button} onClick={() => setPercentage(percentage - 10)} disabled={percentage === 0 || percentage > 100}>back</button>
                 <button className={styles.button} onClick={() => setPercentage(percentage + 10)} disabled={percentage > 80}>front</button>
             </section>
         </main>
