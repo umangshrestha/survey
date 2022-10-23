@@ -16,6 +16,11 @@ interface IWorkshop {
     id: number;
     workshop: string;
 }
+
+interface IFaculty {
+    id: number;
+    faculty: string;
+}
 interface IForm {
     workshop: string;
     facultyNames: string;
@@ -31,14 +36,19 @@ interface ICategory {
     label: string;
 }
 
+interface IProp {
+    workshops: IWorkshop[],
+    facultys: IFaculty[]
+}
 
-const Survey = ({ workshops }: { workshops: IWorkshop[] }) => {
+const Survey = ({ workshops, facultys }: IProp) => {
     const [percentage, setPercentage] = useState(0);
     const [startDate, setStartDate] = useState(new Date());
     const { register, control, handleSubmit } = useForm<IForm>();
     const [rating, setRating] = useState(5);
 
     const workShopOptions: ICategory[] = workshops.map(x => ({ value: x.workshop, label: x.workshop }))
+    const facultyOptions: ICategory[] = workshops.map(x => ({ value: x.workshop, label: x.workshop }))
 
     const submitForm = async (data: IForm) => {
         const res = await fetch(BASE_URL + "/api/feedback", {
@@ -167,10 +177,14 @@ const Survey = ({ workshops }: { workshops: IWorkshop[] }) => {
 }
 
 export async function getStaticProps() {
-    const res = await fetch(BASE_URL + "/api/workshops");
-    const workshops = await res.json();
+    const res = [
+        await fetch(BASE_URL + "/workshop"),
+        await fetch(BASE_URL + "/faculty")
+    ]
     return {
-        props: workshops
+        props: {
+            workshops: await res[0].json(),
+            facultys: await res[1].json(),
+        }
     }
-}
-export default Survey;
+    export default Survey;
