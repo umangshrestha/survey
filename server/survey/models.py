@@ -20,10 +20,10 @@ class Faculty(models.Model):
 class Feedback(models.Model):
     id = models.AutoField(primary_key=True)
     faculty_names = models.TextField()
-    useful_idea = models.TextField()
-    changes_suggested = models.TextField()
-    topics_for_future = models.TextField()
-    additional_comments = models.TextField()
+    useful_idea = models.TextField(blank=True)
+    changes_suggested = models.TextField(blank=True)
+    topics_for_future = models.TextField(blank=True)
+    additional_comments = models.TextField(blank=True)
     rating = models.IntegerField()
     date = models.DateTimeField()
     faculty = models.ForeignKey(

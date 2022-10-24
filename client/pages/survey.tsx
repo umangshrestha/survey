@@ -47,16 +47,16 @@ const Survey = ({ workshops, facultys }: IProp) => {
     const { register, control, handleSubmit } = useForm<IForm>();
     const [rating, setRating] = useState(5);
 
-    const workShopOptions: ICategory[] = workshops.map(x => ({ value: x.workshop, label: x.workshop }))
-    const facultyOptions: ICategory[] = facultys.map(x => ({ value: x.faculty, label: x.faculty }))
+    const workShopOptions: ICategory[] = workshops.map(x => ({ value: x.id.toString(), label: x.workshop }))
+    const facultyOptions: ICategory[] = facultys.map(x => ({ value: x.id.toString(), label: x.faculty }))
 
     const submitForm = async (data: IForm) => {
-        const res = await fetch(BASE_URL + "/feedback", {
+        const res = await fetch(BASE_URL + "/feedback/", {
             method: "POST",
+            headers: {"content-type": "application/json"},
             body: JSON.stringify({ date: startDate, rating, ...data }),
         })
-        console.log(await res.json())
-        if (res.status == 200)
+        if (res.status == 201)
             setPercentage(100);
         else
             setPercentage(99);
@@ -74,7 +74,7 @@ const Survey = ({ workshops, facultys }: IProp) => {
                     <label htmlFor="workshop">Please select the name of the workshop from the list below:</label>
                     <Controller
                         control={control}
-                        defaultValue={workshops[0].workshop}
+                        defaultValue={workshops[0].id.toString()}
                         render={({ field: { onChange, value, name, ref } }) => {
                             const currentSelection = workShopOptions.find(
                                 (c) => c.value === value
@@ -112,7 +112,7 @@ const Survey = ({ workshops, facultys }: IProp) => {
                     < label htmlFor="name" > Facilator(s) name for session:</label >
                     <Controller
                         control={control}
-                        defaultValue={facultys[0].faculty}
+                        defaultValue={facultys[0].id.toString()}
                         render={({ field: { onChange, value, name, ref } }) => {
                             const currentSelection = facultyOptions.find(
                                 (c) => c.value === value
