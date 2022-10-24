@@ -23,7 +23,7 @@ interface IFaculty {
 }
 interface IForm {
     workshop: string;
-    faculty_names: string;
+    faculty: string;
     useful_idea: string;
     changes_suggested: string;
     topics_for_future: string;
@@ -131,7 +131,7 @@ const Survey = ({ workshops, facultys }: IProp) => {
                                 />
                             );
                         }}
-                        name="faculty_names"
+                        name="faculty"
                         rules={{ required: true }}
                     />
                 </>)

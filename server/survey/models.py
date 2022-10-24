@@ -19,7 +19,6 @@ class Faculty(models.Model):
 
 class Feedback(models.Model):
     id = models.AutoField(primary_key=True)
-    faculty_names = models.TextField()
     useful_idea = models.TextField(blank=True)
     changes_suggested = models.TextField(blank=True)
     topics_for_future = models.TextField(blank=True)
