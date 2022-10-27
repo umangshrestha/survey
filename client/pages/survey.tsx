@@ -171,8 +171,8 @@ const Survey = ({ workshops, facultys }: IProp) => {
                 return (<>
                     <img className={styles.img} src="/thankyou-mascot.png" alt="moose saying thankyou" />
                     <p>We appreciate the time you took to provide us with feedback.  We can continue to develop high-quality experiences using your suggestions.</p>
-                    <p> If you are interested in further development with teaching and learning and utilizing Brightspace, please visit:</p>
-                    <a className={styles.a} href="https://ctl2.uwindsor.ca/workshops/145/">https://ctl2.uwindsor.ca/workshops/145/</a>.
+                    <p> If you are interested in further development with teaching and learning and utilizing Brightspace, please visit us at
+                    <a className={styles.a} href="https://ctl2.uwindsor.ca/workshops/145/"> CTL Workshops</a>. </p>
                 </>)
         }
     }
@@ -193,7 +193,7 @@ const Survey = ({ workshops, facultys }: IProp) => {
                 </div>
             </div>
             <section className={styles.section}>
-                <button className={styles.button} onClick={() => setPercentage(percentage - 10)} disabled={percentage === 0 || percentage > 100}>back</button>
+                <button className={styles.button} onClick={() => setPercentage(percentage - 10)} disabled={percentage === 0 || percentage > 80}>back</button>
                 <button className={styles.button} onClick={() => setPercentage(percentage + 10)} disabled={percentage > 80}>front</button>
             </section>
         </main>

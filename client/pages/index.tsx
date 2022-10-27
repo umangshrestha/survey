@@ -38,7 +38,7 @@ const Home: NextPage = () => (
         </a>
         <a href="https://uwindsor.teamdynamix.com/" className={styles.card}>
           <h2>TDX &rarr;</h2>
-          <p>  Raise tickets for teachnical issues realted to Brightspace.</p>
+          <p>  Raise tickets for technical issues realted to Brightspace.</p>
         </a>
 
       </div>
